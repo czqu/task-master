@@ -13,9 +13,9 @@ services:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
     restart: always
     command: --ssl=1 --require-secure-transport=ON
-  task-master:
-    image: task-master:latest
-    container_name: task-master
+  task-master-core:
+    image: task-master-core:latest
+    container_name: task-master-core
     ports:
       - 8083:8083
     environment:
@@ -28,5 +28,5 @@ services:
     depends_on:
       - mysql
     volumes:
-      - /var/log/task-master/:/logs
+      - /var/log/task-master/core/:/logs
 

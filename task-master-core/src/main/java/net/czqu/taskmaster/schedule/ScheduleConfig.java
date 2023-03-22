@@ -22,7 +22,7 @@ public class ScheduleConfig {
         this.exchangeService = exchangeService;
     }
 
-    @Scheduled(cron = "*/30    *    *    *    *    *")
+    @Scheduled(cron = "*    */30    *    *    *    *")
     @Async("scheduledTask")
     public void getExchange() {
         try {
