@@ -19,6 +19,7 @@ services:
     ports:
       - 8083:8083
     environment:
+      - JAVA_OPTS= -Dlog4j.skipJansi=false
       - TZ=Asia/Shanghai
       - SPRING_PROFILES_ACTIVE=prod
       - MYSQL_PORT=${MYSQL_PORT}

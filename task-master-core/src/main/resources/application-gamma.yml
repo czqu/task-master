@@ -4,5 +4,9 @@ spring:
     url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/task_master_gamma?useSSL=true
     username:  ${MYSQL_USER}
     password:  ${MYSQL_PASSWORD}
+mybatis:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-
+logging:
+    config: classpath:log4j2-gamma.xml

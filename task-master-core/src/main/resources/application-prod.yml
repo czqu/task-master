@@ -8,5 +8,4 @@ spring:
     username:  ${MYSQL_USER}
     password:  ${MYSQL_PASSWORD}
 logging:
-  file:
-    name: "/logs/app.log"
+  config: classpath:log4j2-prod.xml
