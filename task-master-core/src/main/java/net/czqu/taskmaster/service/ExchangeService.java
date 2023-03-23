@@ -6,7 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.czqu.taskmaster.dto.ExchangesDTO;
 import net.czqu.taskmaster.dto.ICBCDTO;
 import net.czqu.taskmaster.dto.ICBCGetDTO;
-import net.czqu.taskmaster.utils.DateTimeParser;
+import net.czqu.taskmaster.utils.DateTimeUtil;
 import net.czqu.taskmaster.utils.HttpClientUtil;
 import net.czqu.taskmasterdao.example.ExchangesExample;
 import net.czqu.taskmasterdao.mapper.ExchangesMapper;
@@ -82,8 +82,8 @@ public class ExchangeService {
         exchangesDTO.setReference(new BigDecimal(item.getReference()));
         exchangesDTO.setCurrencyType(item.getCurrencyType());
 
-        LocalDate publishDate = DateTimeParser.parseDate(item.getPublishDate(), "yyyy-MM-dd");
-        LocalTime publishTime = DateTimeParser.parseTime(item.getPublishTime(), "HH:mm:ss");
+        LocalDate publishDate = DateTimeUtil.parseDate(item.getPublishDate(), "yyyy-MM-dd");
+        LocalTime publishTime = DateTimeUtil.parseTime(item.getPublishTime(), "HH:mm:ss");
         ZoneId zoneId = ZoneId.of("Asia/Shanghai");
         exchangesDTO.setPublishTime(Date.from(LocalDateTime.of(publishDate, publishTime).atZone(zoneId).toInstant()));
         exchangesDTO.setBankId((byte) ICBC.getId());

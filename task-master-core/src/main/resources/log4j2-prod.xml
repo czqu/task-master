@@ -15,9 +15,20 @@
             </Policies>
             <DefaultRolloverStrategy max="10"/>
         </RollingFile>
+        <RollingFile name="ApiLog" fileName="/logs/api.log"
+                     filePattern="/logs/api-%d{yyyy-MM-dd}-%i.log.gz">
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
+        <!--        为false不打印到控制台-->
+        <Logger name="ApiLog" level="info" additivity="false">
+            <AppenderRef ref="ApiLog"/>
+        </Logger>
         <Root level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>

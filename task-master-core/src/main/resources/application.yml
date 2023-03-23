@@ -7,3 +7,7 @@ mybatis:
 spring:
   jackson:
     time-zone: GMT+8
+management:
+  server:
+    address: 127.0.0.1 # 只允许本地访问
+    port: 7777

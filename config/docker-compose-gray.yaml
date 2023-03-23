@@ -1,0 +1,17 @@
+version: '3.1'
+services:
+  task-master-core-gray:
+    image: task-master-core:latest
+    container_name: task-master-core-gray
+    ports:
+      - 8084:8083
+    environment:
+      - JAVA_OPTS= -Dlog4j.skipJansi=false
+      - TZ=Asia/Shanghai
+      - SPRING_PROFILES_ACTIVE=prod
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - /var/log/task-master/core-gray/:/logs
