@@ -1,0 +1,11 @@
+spring:
+  devtools:
+    restart:
+      enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/task_master_prod?useSSL=true
+    username:  ${MYSQL_USER}
+    password:  ${MYSQL_PASSWORD}
+logging:
+  config: classpath:log4j2-prod.xml

@@ -9,3 +9,5 @@ spring:
     password:  ${MYSQL_PASSWORD}
 logging:
   config: classpath:log4j2-prod.xml
+sso:
+  url: https://sso.voidbytes.com/

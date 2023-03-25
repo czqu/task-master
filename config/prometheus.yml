@@ -1,0 +1,11 @@
+global:
+  scrape_interval: 5s
+scrape_configs:
+  - job_name: 'task-master-sso'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: ['task-master-sso:7791']
+  - job_name: 'task-master-core'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'task-master-core:7783' ]

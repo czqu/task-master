@@ -3,18 +3,27 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>net.czqu</groupId>
+        <groupId>net.czqu.taskmaster</groupId>
         <artifactId>task-master</artifactId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>net.czqu</groupId>
     <artifactId>task-master-core</artifactId>
     <version>${revision}</version>
     <dependencies>
         <dependency>
-            <groupId>net.czqu</groupId>
+            <groupId>net.czqu.taskmaster</groupId>
             <artifactId>task-master-dao</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.czqu.taskmaster</groupId>
+            <artifactId>task-master-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.czqu.taskmaster</groupId>
+            <artifactId>task-master-security</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
@@ -91,6 +100,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
+                    <mainClass>net.czqu.taskmaster.core.TaskMasterApplication</mainClass>
                     <excludes>
                         <exclude>
                             <groupId>org.projectlombok</groupId>

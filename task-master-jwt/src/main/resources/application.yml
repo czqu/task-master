@@ -1,9 +1,0 @@
-server:
-  port: 8091
-mybatis:
-  mapper-locations: classpaths:mappers/*.xml
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-jwt:
-  secret: "HRlELXqpSB"
-  expiration: 86400000

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.czqu.taskmasterdao.mapper.TmRoleMapper">
-  <resultMap id="BaseResultMap" type="net.czqu.taskmasterdao.pojo.TmRole">
+<mapper namespace="net.czqu.taskmaster.dao.mapper.TmRoleMapper">
+  <resultMap id="BaseResultMap" type="net.czqu.taskmaster.dao.pojo.TmRole">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
   </resultMap>
@@ -66,7 +66,7 @@
   <sql id="Base_Column_List">
     id, name
   </sql>
-  <select id="selectByExample" parameterType="net.czqu.taskmasterdao.example.TmRoleExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.czqu.taskmaster.dao.example.TmRoleExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -144,13 +144,13 @@
     delete from tm_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.czqu.taskmasterdao.example.TmRoleExample">
+  <delete id="deleteByExample" parameterType="net.czqu.taskmaster.dao.example.TmRoleExample">
     delete from tm_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.czqu.taskmasterdao.pojo.TmRole">
+  <insert id="insert" parameterType="net.czqu.taskmaster.dao.pojo.TmRole">
     insert into tm_role (id, name)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR})
   </insert>
@@ -193,7 +193,7 @@
       </otherwise>
     </choose>
   </insert>
-  <select id="countByExample" parameterType="net.czqu.taskmasterdao.example.TmRoleExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.czqu.taskmaster.dao.example.TmRoleExample" resultType="java.lang.Long">
     select count(*) from tm_role
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -250,12 +250,12 @@
     </choose>
     where id = #{record.id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.czqu.taskmasterdao.pojo.TmRole">
+  <update id="updateByPrimaryKey" parameterType="net.czqu.taskmaster.dao.pojo.TmRole">
     update tm_role
     set name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectOneByExample" parameterType="net.czqu.taskmasterdao.example.TmRoleExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="net.czqu.taskmaster.dao.example.TmRoleExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tm_role

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.czqu.taskmasterdao.mapper.ExchangesMapper">
-  <resultMap id="BaseResultMap" type="net.czqu.taskmasterdao.pojo.Exchanges">
+<mapper namespace="net.czqu.taskmaster.dao.mapper.ExchangesMapper">
+  <resultMap id="BaseResultMap" type="net.czqu.taskmaster.dao.pojo.Exchanges">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="bank_id" jdbcType="TINYINT" property="bankId" />
     <result column="currency_type" jdbcType="TINYINT" property="currencyType" />
@@ -75,7 +75,7 @@
     id, bank_id, currency_type, reference, foreign_buy, foreign_sell, cash_buy, cash_sell, 
     publish_time, creat_time
   </sql>
-  <select id="selectByExample" parameterType="net.czqu.taskmasterdao.example.ExchangesExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.czqu.taskmaster.dao.example.ExchangesExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -153,13 +153,13 @@
     delete from exchanges
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.czqu.taskmasterdao.example.ExchangesExample">
+  <delete id="deleteByExample" parameterType="net.czqu.taskmaster.dao.example.ExchangesExample">
     delete from exchanges
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.czqu.taskmasterdao.pojo.Exchanges">
+  <insert id="insert" parameterType="net.czqu.taskmaster.dao.pojo.Exchanges">
     insert into exchanges (id, bank_id, currency_type, 
       reference, foreign_buy, foreign_sell, 
       cash_buy, cash_sell, publish_time, 
@@ -256,7 +256,7 @@
       </otherwise>
     </choose>
   </insert>
-  <select id="countByExample" parameterType="net.czqu.taskmasterdao.example.ExchangesExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.czqu.taskmaster.dao.example.ExchangesExample" resultType="java.lang.Long">
     select count(*) from exchanges
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -369,7 +369,7 @@
     </choose>
     where id = #{record.id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.czqu.taskmasterdao.pojo.Exchanges">
+  <update id="updateByPrimaryKey" parameterType="net.czqu.taskmaster.dao.pojo.Exchanges">
     update exchanges
     set bank_id = #{bankId,jdbcType=TINYINT},
       currency_type = #{currencyType,jdbcType=TINYINT},
@@ -382,7 +382,7 @@
       creat_time = #{creatTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectOneByExample" parameterType="net.czqu.taskmasterdao.example.ExchangesExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="net.czqu.taskmaster.dao.example.ExchangesExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from exchanges

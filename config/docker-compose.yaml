@@ -17,7 +17,8 @@ services:
     image: task-master-core:latest
     container_name: task-master-core
     ports:
-      - 8083:8083
+      - "7783:7783"
+      - "8083:8083"
     environment:
       - JAVA_OPTS= -Dlog4j.skipJansi=false
       - TZ=Asia/Shanghai
@@ -26,11 +27,33 @@ services:
       - MYSQL_HOST=${MYSQL_HOST}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - JWT_PUB_KEY=${JWT_PUB_KEY}
     depends_on:
       - mysql
     volumes:
       - /var/log/task-master/core/:/logs
-
+  task-master-sso:
+    image: task-master-sso:latest
+    container_name: task-master-sso
+    ports:
+      - "8091:8091"
+      - "7791:7791"
+    environment:
+      - JAVA_OPTS= -Dlog4j.skipJansi=false
+      - TZ=Asia/Shanghai
+      - SPRING_PROFILES_ACTIVE=prod
+      - MYSQL_PORT=${MYSQL_PORT}
+      - MYSQL_HOST=${MYSQL_HOST}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - JWT_EXPIRATION=${JWT_EXPIRATION}
+      - JWT_PUB_KEY=${JWT_PUB_KEY}
+      - JWT_PRIVATE_KEY=${JWT_PRIVATE_KEY}
+    depends_on:
+      - mysql
+    volumes:
+      - /var/log/task-master/core/sso/:/logs
   portainer:
     image: portainer/portainer-ce:2.17.1
     container_name: portainer
@@ -46,5 +69,18 @@ services:
       - "9443:9443"
       - "8000:8000"
     command: ["--sslcert", "/certs/portainer.crt", "--sslkey", "/certs/portainer.key"]
+  prometheus:
+      image: prom/prometheus:v2.26.0
+      ports:
+        - "9090:9090"
+      volumes:
+        - /data/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+        image: grafana/grafana:7.5.3
+        ports:
+          - "3000:3000"
+        environment:
+          - GF_SECURITY_ADMIN_USER=${GRAFANA_ADMIN_USERNAME}
+          - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_ADMIN_PASSWORD}
 volumes:
   portainer_data:

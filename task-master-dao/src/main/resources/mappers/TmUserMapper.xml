@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="net.czqu.taskmasterdao.mapper.TmUserMapper">
-  <resultMap id="BaseResultMap" type="net.czqu.taskmasterdao.pojo.TmUser">
+<mapper namespace="net.czqu.taskmaster.dao.mapper.TmUserMapper">
+  <resultMap id="BaseResultMap" type="net.czqu.taskmaster.dao.pojo.TmUser">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="uid" jdbcType="VARCHAR" property="uid" />
+    <result column="uid" jdbcType="INTEGER" property="uid" />
     <result column="username" jdbcType="VARCHAR" property="username" />
-    <result column="password_salt" jdbcType="VARCHAR" property="passwordSalt" />
-    <result column="password_hash" jdbcType="VARCHAR" property="passwordHash" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="email" jdbcType="VARCHAR" property="email" />
     <result column="phone" jdbcType="VARCHAR" property="phone" />
     <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
@@ -70,9 +69,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, uid, username, password_salt, password_hash, email, phone, created_at
+    id, uid, username, password, email, phone, created_at
   </sql>
-  <select id="selectByExample" parameterType="net.czqu.taskmasterdao.example.TmUserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="net.czqu.taskmaster.dao.example.TmUserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -150,19 +149,19 @@
     delete from tm_user
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="net.czqu.taskmasterdao.example.TmUserExample">
+  <delete id="deleteByExample" parameterType="net.czqu.taskmaster.dao.example.TmUserExample">
     delete from tm_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="net.czqu.taskmasterdao.pojo.TmUser">
+  <insert id="insert" parameterType="net.czqu.taskmaster.dao.pojo.TmUser">
     insert into tm_user (id, uid, username, 
-      password_salt, password_hash, email, 
-      phone, created_at)
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
-      #{passwordSalt,jdbcType=VARCHAR}, #{passwordHash,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
-      #{phone,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP})
+      password, email, phone, 
+      created_at)
+    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{createdAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="map">
     insert into tm_user
@@ -183,11 +182,8 @@
           <if test="record.username != null">
             username,
           </if>
-          <if test="record.passwordSalt != null">
-            password_salt,
-          </if>
-          <if test="record.passwordHash != null">
-            password_hash,
+          <if test="record.password != null">
+            password,
           </if>
           <if test="record.email != null">
             email,
@@ -215,16 +211,13 @@
             #{record.id,jdbcType=INTEGER},
           </if>
           <if test="record.uid != null">
-            #{record.uid,jdbcType=VARCHAR},
+            #{record.uid,jdbcType=INTEGER},
           </if>
           <if test="record.username != null">
             #{record.username,jdbcType=VARCHAR},
           </if>
-          <if test="record.passwordSalt != null">
-            #{record.passwordSalt,jdbcType=VARCHAR},
-          </if>
-          <if test="record.passwordHash != null">
-            #{record.passwordHash,jdbcType=VARCHAR},
+          <if test="record.password != null">
+            #{record.password,jdbcType=VARCHAR},
           </if>
           <if test="record.email != null">
             #{record.email,jdbcType=VARCHAR},
@@ -239,7 +232,7 @@
       </otherwise>
     </choose>
   </insert>
-  <select id="countByExample" parameterType="net.czqu.taskmasterdao.example.TmUserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="net.czqu.taskmaster.dao.example.TmUserExample" resultType="java.lang.Long">
     select count(*) from tm_user
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -260,16 +253,13 @@
             id = #{record.id,jdbcType=INTEGER},
           </if>
           <if test="record.uid != null">
-            uid = #{record.uid,jdbcType=VARCHAR},
+            uid = #{record.uid,jdbcType=INTEGER},
           </if>
           <if test="record.username != null">
             username = #{record.username,jdbcType=VARCHAR},
           </if>
-          <if test="record.passwordSalt != null">
-            password_salt = #{record.passwordSalt,jdbcType=VARCHAR},
-          </if>
-          <if test="record.passwordHash != null">
-            password_hash = #{record.passwordHash,jdbcType=VARCHAR},
+          <if test="record.password != null">
+            password = #{record.password,jdbcType=VARCHAR},
           </if>
           <if test="record.email != null">
             email = #{record.email,jdbcType=VARCHAR},
@@ -290,10 +280,9 @@
   <update id="updateByExample" parameterType="map">
     update tm_user
     set id = #{record.id,jdbcType=INTEGER},
-      uid = #{record.uid,jdbcType=VARCHAR},
+      uid = #{record.uid,jdbcType=INTEGER},
       username = #{record.username,jdbcType=VARCHAR},
-      password_salt = #{record.passwordSalt,jdbcType=VARCHAR},
-      password_hash = #{record.passwordHash,jdbcType=VARCHAR},
+      password = #{record.password,jdbcType=VARCHAR},
       email = #{record.email,jdbcType=VARCHAR},
       phone = #{record.phone,jdbcType=VARCHAR},
       created_at = #{record.createdAt,jdbcType=TIMESTAMP}
@@ -313,16 +302,13 @@
       <otherwise>
         <trim suffixOverrides=",">
           <if test="record.uid != null">
-            uid = #{record.uid,jdbcType=VARCHAR},
+            uid = #{record.uid,jdbcType=INTEGER},
           </if>
           <if test="record.username != null">
             username = #{record.username,jdbcType=VARCHAR},
           </if>
-          <if test="record.passwordSalt != null">
-            password_salt = #{record.passwordSalt,jdbcType=VARCHAR},
-          </if>
-          <if test="record.passwordHash != null">
-            password_hash = #{record.passwordHash,jdbcType=VARCHAR},
+          <if test="record.password != null">
+            password = #{record.password,jdbcType=VARCHAR},
           </if>
           <if test="record.email != null">
             email = #{record.email,jdbcType=VARCHAR},
@@ -338,18 +324,17 @@
     </choose>
     where id = #{record.id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="net.czqu.taskmasterdao.pojo.TmUser">
+  <update id="updateByPrimaryKey" parameterType="net.czqu.taskmaster.dao.pojo.TmUser">
     update tm_user
-    set uid = #{uid,jdbcType=VARCHAR},
+    set uid = #{uid,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
-      password_salt = #{passwordSalt,jdbcType=VARCHAR},
-      password_hash = #{passwordHash,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
       created_at = #{createdAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectOneByExample" parameterType="net.czqu.taskmasterdao.example.TmUserExample" resultMap="BaseResultMap">
+  <select id="selectOneByExample" parameterType="net.czqu.taskmaster.dao.example.TmUserExample" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from tm_user
@@ -384,12 +369,12 @@
   </select>
   <insert id="batchInsert" parameterType="map">
     insert into tm_user
-    (id, uid, username, password_salt, password_hash, email, phone, created_at)
+    (id, uid, username, password, email, phone, created_at)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=INTEGER}, #{item.uid,jdbcType=VARCHAR}, #{item.username,jdbcType=VARCHAR}, 
-        #{item.passwordSalt,jdbcType=VARCHAR}, #{item.passwordHash,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, 
-        #{item.phone,jdbcType=VARCHAR}, #{item.createdAt,jdbcType=TIMESTAMP})
+      (#{item.id,jdbcType=INTEGER}, #{item.uid,jdbcType=INTEGER}, #{item.username,jdbcType=VARCHAR}, 
+        #{item.password,jdbcType=VARCHAR}, #{item.email,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR}, 
+        #{item.createdAt,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -406,16 +391,13 @@
           #{item.id,jdbcType=INTEGER}
         </if>
         <if test="'uid'.toString() == column.value">
-          #{item.uid,jdbcType=VARCHAR}
+          #{item.uid,jdbcType=INTEGER}
         </if>
         <if test="'username'.toString() == column.value">
           #{item.username,jdbcType=VARCHAR}
         </if>
-        <if test="'password_salt'.toString() == column.value">
-          #{item.passwordSalt,jdbcType=VARCHAR}
-        </if>
-        <if test="'password_hash'.toString() == column.value">
-          #{item.passwordHash,jdbcType=VARCHAR}
+        <if test="'password'.toString() == column.value">
+          #{item.password,jdbcType=VARCHAR}
         </if>
         <if test="'email'.toString() == column.value">
           #{item.email,jdbcType=VARCHAR}

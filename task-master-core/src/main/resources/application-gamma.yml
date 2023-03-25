@@ -10,3 +10,5 @@ mybatis:
 
 logging:
     config: classpath:log4j2-gamma.xml
+sso:
+  url: http://localhost:8091/

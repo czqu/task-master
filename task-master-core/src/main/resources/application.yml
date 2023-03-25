@@ -8,6 +8,21 @@ spring:
   jackson:
     time-zone: GMT+8
 management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    web:
+      server:
+        request:
+          metric-name: http.server.requests
+    enable:
+      thread-state: true
+      process: true
   server:
-    address: 127.0.0.1 # 只允许本地访问
-    port: 7777
+    port: 7783
+sso:
+  jwt:
+    public-key:  ${JWT_PUB_KEY}
+    expiration:   ${JWT_EXPIRATION}
