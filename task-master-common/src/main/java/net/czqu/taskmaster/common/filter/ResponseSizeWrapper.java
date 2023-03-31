@@ -1,9 +1,4 @@
-package net.czqu.taskmaster.core.filter;
-
-import org.apache.http.HttpResponse;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
+package net.czqu.taskmaster.common.filter;
 
 /**
  * @program: task-master

@@ -3,6 +3,7 @@ package net.czqu.taskmaster.sso.service;
 
 import net.czqu.taskmaster.sso.config.CustomUserDetail;
 import net.czqu.taskmaster.dao.pojo.TmUser;
+import org.apache.commons.lang3.math.NumberUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,6 +36,9 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public CustomUserDetail loadUserByUsername(String inputuid) throws UsernameNotFoundException {
+        if (!NumberUtils.isDigits(inputuid)) {
+            return null;
+        }
         int uid=Integer.parseInt(inputuid);
         TmUser user = tmUserService.getUserByUid(uid);
         if (user == null) {

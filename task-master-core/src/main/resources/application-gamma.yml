@@ -11,4 +11,4 @@ mybatis:
 logging:
     config: classpath:log4j2-gamma.xml
 sso:
-  url: http://localhost:8091/
+  url:  https://sso.voidbytes.com/  #http://127.0.0.1:8091/

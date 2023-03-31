@@ -38,6 +38,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = (String) authentication.getCredentials();
 
         CustomUserDetail userInfo = userDetailsService.loadUserByUsername(uid);
+        if (userInfo == null) {
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
         boolean isValid = false;
         isValid = new BCryptPasswordEncoder().matches(password, userInfo.getPassword());
         if (!isValid) {

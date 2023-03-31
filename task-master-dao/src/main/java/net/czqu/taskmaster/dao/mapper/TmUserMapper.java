@@ -1,7 +1,6 @@
 package net.czqu.taskmaster.dao.mapper;
 
 import java.util.List;
-
 import net.czqu.taskmaster.dao.example.TmUserExample;
 import net.czqu.taskmaster.dao.pojo.TmUser;
 import org.apache.ibatis.annotations.Param;

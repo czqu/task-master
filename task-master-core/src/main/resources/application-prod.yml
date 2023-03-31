@@ -10,4 +10,4 @@ spring:
 logging:
   config: classpath:log4j2-prod.xml
 sso:
-  url: https://sso.voidbytes.com/
+  url: http://task-master-sso:8091/

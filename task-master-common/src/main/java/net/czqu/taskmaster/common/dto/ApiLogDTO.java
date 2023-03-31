@@ -1,7 +1,9 @@
-package net.czqu.taskmaster.core.dto;
+package net.czqu.taskmaster.common.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 /**
  * @program: task-master
@@ -13,13 +15,16 @@ import lombok.Setter;
 @Setter
 public class ApiLogDTO {
 
+    private int appId;
     private String method;
     private String protocol;
     private Integer statusCode;
-
-    private String url;
+    private String hostName;
+    private String requestUri;
+    private int uid;
+    private String UserName;
     private String params;
-    private String time;
+    private Date time;
     private String ip;
     private String userAgent;
     private Long bodySize;

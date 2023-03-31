@@ -14,6 +14,8 @@ import lombok.Setter;
 public class JwtAuthenticationDTO {
     private String token;
 
+    public JwtAuthenticationDTO() {
+    }
     public JwtAuthenticationDTO(String token) {
         this.token = token;
     }

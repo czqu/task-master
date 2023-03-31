@@ -22,7 +22,7 @@
         <!-- Example 目标包修改插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.ExampleTargetPlugin">
             <!-- 修改Example类生成到目标包下 -->
-            <property name="targetPackage" value="net.czqu.taskmasterdao.example"/>
+            <property name="targetPackage" value="net.czqu.taskmaster.dao.example"/>
         </plugin>
         <!-- 批量插入插件 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin">
@@ -53,11 +53,10 @@
         </commentGenerator>
 
         <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
-                        connectionURL="jdbc:mysql://${MYSQL_HOST}:${MYSQL_PORT}/task_master_gamma?useSSL=true"
-                        userId="${MYSQL_USER}"
-                        password="${MYSQL_PASSWORD}">
+                        connectionURL="jdbc:mysql://alhz.voidbytes.com:13316/task_master_gamma?useSSL=true"
+                        userId="gamma"
+                        password="e5v41gwe5ryger569">
         </jdbcConnection>
-
         <!-- 类型转换 -->
         <javaTypeResolver>
             <!-- 是否使用BigDecimals，false可自动转化以下类型(Long Integer Short等) -->
@@ -65,7 +64,7 @@
         </javaTypeResolver>
 
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="net.czqu.taskmasterdao.pojo" targetProject="target/classes/generator">
+        <javaModelGenerator targetPackage="net.czqu.taskmaster.dao.pojo" targetProject="target/classes/generator">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
@@ -76,7 +75,7 @@
         </sqlMapGenerator>
 
         <!-- 生成DAO的包名和位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="net.czqu.taskmasterdao.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="net.czqu.taskmaster.dao.mapper"
                              targetProject="target/classes/generator">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
@@ -85,6 +84,7 @@
         <table tableName="tm_role"/>
         <table tableName="tm_user_role"/>
         <table tableName="exchanges"/>
+        <table tableName="access_log"/>
 
 
     </context>

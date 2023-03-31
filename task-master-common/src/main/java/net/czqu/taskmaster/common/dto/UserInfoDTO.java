@@ -2,6 +2,7 @@ package net.czqu.taskmaster.common.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 /**
  * @program: task-master
@@ -11,6 +12,7 @@ import lombok.Setter;
  **/
 @Getter
 @Setter
+@ToString
 public class UserInfoDTO {
 
     private Integer uid;

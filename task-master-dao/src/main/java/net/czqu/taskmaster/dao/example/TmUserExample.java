@@ -3,7 +3,6 @@ package net.czqu.taskmaster.dao.example;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import net.czqu.taskmaster.dao.pojo.TmUser;
 
 public class TmUserExample {

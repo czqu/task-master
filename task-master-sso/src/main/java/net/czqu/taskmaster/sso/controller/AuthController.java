@@ -64,7 +64,7 @@ public class AuthController {
             in = ParameterIn.HEADER,
             hidden = true
     )
-    public ResponseEntity<?> authenticateUser(@RequestBody AuthDTO loginRequest) throws JsonProcessingException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public ResponseResult<JwtAuthenticationDTO> authenticateUser(@RequestBody AuthDTO loginRequest) throws JsonProcessingException, NoSuchAlgorithmException, InvalidKeySpecException {
 
         // 进行身份验证
         Authentication authentication = authenticationManager.authenticate(
@@ -79,7 +79,7 @@ public class AuthController {
 
         // 生成 JWT
         String jwt = jwtService.generateToken(authentication);
-        return ResponseEntity.ok(new JwtAuthenticationDTO(jwt));
+        return ResponseResult.success(new JwtAuthenticationDTO(jwt));
     }
 
     @PostMapping("/register")

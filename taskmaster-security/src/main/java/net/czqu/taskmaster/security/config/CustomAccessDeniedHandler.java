@@ -1,6 +1,7 @@
 package net.czqu.taskmaster.security.config;
 
 import net.czqu.taskmaster.common.response.ResponseResult;
+import net.czqu.taskmaster.common.utils.JacksonUtils;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
@@ -23,6 +24,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException accessDeniedException) throws IOException, ServletException {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType(MediaType.APPLICATION_JSON_VALUE);
-        response.getWriter().write(   ResponseResult.error( "权限不足，请联系管理员").toString() );
+        ResponseResult result = ResponseResult.error().msg("UNAUTHORIZED").errCode("403");
+        response.getWriter().write(JacksonUtils.serialize(result));
     }
 }

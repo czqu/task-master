@@ -2,7 +2,6 @@ package net.czqu.taskmaster.dao.example;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import net.czqu.taskmaster.dao.pojo.TmRole;
 
 public class TmRoleExample {

@@ -48,11 +48,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (jwt == null) {
             try {
                 filterChain.doFilter(request, response);
+                return;
             } catch (AccessDeniedException e) {
                 throw e;
             }
-            ;
-            return;
+
         }
 
         try {
